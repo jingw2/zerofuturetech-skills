@@ -1,0 +1,10 @@
+{
+  "name": "zerofuturetech-skills",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Reusable Codex skills from Zero Future Tech",
+  "license": "MIT",
+  "bin": {
+    "zerofuturetech-skills": "./scripts/install-skill.mjs"
+  }
+}
