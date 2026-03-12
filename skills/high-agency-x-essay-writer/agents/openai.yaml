@@ -1,0 +1,4 @@
+interface:
+  display_name: "High Agency X Essay Writer"
+  short_description: "Write high-agency contrarian X-style essays"
+  default_prompt: "Use $high-agency-x-essay-writer to turn my idea into a high-agency, contrarian long-form article for X without imitating any living author."
