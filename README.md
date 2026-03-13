@@ -4,6 +4,12 @@
 
 Public skill registry for reusable Codex writing and publishing workflows from Zero Future Tech.
 
+Supported targets:
+
+- Codex
+- OpenClaw
+- Claude Code
+
 ## Quick Install
 
 Install the WeChat publisher:
@@ -19,6 +25,13 @@ npx github:jingw2/zerofuturetech-skills x-essay
 ```
 
 Both commands install to `~/.codex/skills` by default.
+
+Other platforms:
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
+npx github:jingw2/zerofuturetech-skills wechat --platform claude
+```
 
 ## Skills
 
@@ -84,12 +97,28 @@ Supported aliases:
 - `x-essay` -> `high-agency-x-essay-writer`
 - `essay` -> `high-agency-x-essay-writer`
 
+Supported platforms:
+
+- `codex` -> installs to `~/.codex/skills`
+- `openclaw` -> installs to `~/.openclaw/skills`
+- `claude` -> installs to `~/.claude/agents`
+
+Examples:
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat --platform codex
+npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
+npx github:jingw2/zerofuturetech-skills wechat --platform claude
+```
+
 ### Option 2: global install
 
 ```bash
 npm install -g github:jingw2/zerofuturetech-skills
 zerofuturetech-skills wechat
 zerofuturetech-skills x-essay
+zerofuturetech-skills wechat --platform openclaw
+zerofuturetech-skills wechat --platform claude
 ```
 
 The old explicit form still works:
@@ -103,6 +132,7 @@ Custom target directory:
 
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat --target ~/.codex/skills
+npx github:jingw2/zerofuturetech-skills wechat --platform claude --target ~/.claude/agents
 ```
 
 ### Option 3: copy manually
@@ -207,7 +237,8 @@ wechat_style: tech-editorial
 - Each skill is self-contained under `skills/`
 - `SKILL.md` is the source of truth
 - `references/` stores on-demand guidance
-- This repo is optimized for Codex skill installation, not as a general npm library
+- Codex and OpenClaw install the original skill folders
+- Claude Code installs matching subagent markdown files from `platforms/claude/agents/`
 
 ## Star Growth
 

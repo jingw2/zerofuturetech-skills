@@ -4,6 +4,12 @@
 
 Zero Future Tech 的公开 Codex skill 仓库，主要放可复用的写作和发布工作流。
 
+当前支持的平台：
+
+- Codex
+- OpenClaw
+- Claude Code
+
 ## 快速安装
 
 安装微信公众号发布 skill：
@@ -19,6 +25,13 @@ npx github:jingw2/zerofuturetech-skills x-essay
 ```
 
 默认会安装到 `~/.codex/skills`。
+
+其他平台安装示例：
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
+npx github:jingw2/zerofuturetech-skills wechat --platform claude
+```
 
 ## Skills
 
@@ -84,12 +97,28 @@ npx github:jingw2/zerofuturetech-skills x-essay
 - `x-essay` -> `high-agency-x-essay-writer`
 - `essay` -> `high-agency-x-essay-writer`
 
+支持这些平台参数：
+
+- `codex` -> 安装到 `~/.codex/skills`
+- `openclaw` -> 安装到 `~/.openclaw/skills`
+- `claude` -> 安装到 `~/.claude/agents`
+
+示例：
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat --platform codex
+npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
+npx github:jingw2/zerofuturetech-skills wechat --platform claude
+```
+
 ### 方式 2：全局安装
 
 ```bash
 npm install -g github:jingw2/zerofuturetech-skills
 zerofuturetech-skills wechat
 zerofuturetech-skills x-essay
+zerofuturetech-skills wechat --platform openclaw
+zerofuturetech-skills wechat --platform claude
 ```
 
 旧写法也兼容：
@@ -103,6 +132,7 @@ zerofuturetech-skills install high-agency-x-essay-writer
 
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat --target ~/.codex/skills
+npx github:jingw2/zerofuturetech-skills wechat --platform claude --target ~/.claude/agents
 ```
 
 ### 方式 3：手动复制
@@ -207,7 +237,8 @@ wechat_style: tech-editorial
 - 每个 skill 都是 `skills/` 下的独立目录
 - `SKILL.md` 是 skill 的唯一事实来源
 - `references/` 放按需读取的补充资料
-- 这个仓库主要是给 Codex 安装 skill 用的，不是通用 npm 库
+- Codex 和 OpenClaw 会安装原始 skill 目录
+- Claude Code 会安装 `platforms/claude/agents/` 下对应的 subagent 文件
 
 ## Star 增长图
 
