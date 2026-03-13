@@ -1,0 +1,14 @@
+<svg width="960" height="560" viewBox="0 0 960 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="560" rx="32" fill="#F3F0E8"/>
+  <rect x="86" y="44" width="788" height="472" rx="20" fill="#FFFDF8"/>
+  <text x="124" y="108" fill="#8A8475" font-family="Arial, sans-serif" font-size="22">minimal-cn</text>
+  <text x="124" y="156" fill="#222222" font-family="Arial, sans-serif" font-size="42" font-weight="700">中文专栏感，克制、耐看、正文优先</text>
+  <text x="124" y="208" fill="#5A5F59" font-family="Arial, sans-serif" font-size="23">适合观点长文、AI 观察、知识类写作</text>
+  <line x1="124" y1="250" x2="836" y2="250" stroke="#E7E0D2" stroke-width="2"/>
+  <text x="124" y="306" fill="#B38A4C" font-family="Arial, sans-serif" font-size="28">— 为什么很多 AI 内容没有形成复利</text>
+  <rect x="124" y="334" width="652" height="16" rx="8" fill="#D8D1C3"/>
+  <rect x="124" y="366" width="688" height="16" rx="8" fill="#DDD6C9"/>
+  <rect x="124" y="398" width="620" height="16" rx="8" fill="#E4DDD1"/>
+  <rect x="124" y="442" width="224" height="38" rx="19" fill="#EEE7D8"/>
+  <text x="154" y="468" fill="#726D62" font-family="Arial, sans-serif" font-size="20">essay · minimal-cn</text>
+</svg>

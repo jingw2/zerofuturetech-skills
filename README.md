@@ -45,6 +45,14 @@ Auto style recommendation:
 - `tutorial` -> `bold`
 - `brief` -> `minimal-cn`
 
+Style preview:
+
+| Style | Preview | Best for |
+| --- | --- | --- |
+| `minimal-cn` | ![minimal-cn](./assets/readme/wechat-style-minimal-cn.svg) | Chinese essays, opinion pieces, calm long-form reading |
+| `tech-editorial` | ![tech-editorial](./assets/readme/wechat-style-tech-editorial.svg) | AI, product, workflow, and tech analysis posts |
+| `bold` | ![bold](./assets/readme/wechat-style-bold.svg) | Tutorials, playbooks, and structured step-by-step articles |
+
 ### `high-agency-x-essay-writer`
 
 Write high-agency, contrarian long-form X/newsletter essays in English or Chinese without imitating any living author.
@@ -200,3 +208,7 @@ wechat_style: tech-editorial
 - `SKILL.md` is the source of truth
 - `references/` stores on-demand guidance
 - This repo is optimized for Codex skill installation, not as a general npm library
+
+## Star Growth
+
+[![Star History Chart](https://api.star-history.com/svg?repos=jingw2/zerofuturetech-skills&type=Date)](https://star-history.com/#jingw2/zerofuturetech-skills&Date)

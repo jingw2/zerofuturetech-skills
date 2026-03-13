@@ -1,0 +1,15 @@
+<svg width="960" height="560" viewBox="0 0 960 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="560" rx="32" fill="#ECEBE7"/>
+  <rect x="86" y="44" width="788" height="472" rx="28" fill="#FFFFFF"/>
+  <text x="124" y="108" fill="#386E5A" font-family="Arial, sans-serif" font-size="22">bold</text>
+  <text x="124" y="156" fill="#17262F" font-family="Arial, sans-serif" font-size="42" font-weight="700">教程型结构更强，分节一眼能看清</text>
+  <text x="124" y="208" fill="#55616A" font-family="Arial, sans-serif" font-size="23">适合步骤文、方法论、操作指南</text>
+  <rect x="124" y="252" width="420" height="48" rx="16" fill="#1F7A5C"/>
+  <text x="150" y="284" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="26" font-weight="700">1. 先固定输入输出结构</text>
+  <rect x="124" y="326" width="676" height="16" rx="8" fill="#D7E5DE"/>
+  <rect x="124" y="358" width="628" height="16" rx="8" fill="#E1ECE7"/>
+  <rect x="124" y="400" width="420" height="48" rx="16" fill="#1F7A5C"/>
+  <text x="150" y="432" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="26" font-weight="700">2. 再加人工确认点</text>
+  <rect x="124" y="468" width="188" height="36" rx="18" fill="#EAF6F0"/>
+  <text x="150" y="492" fill="#1F7A5C" font-family="Arial, sans-serif" font-size="20">tutorial · bold</text>
+</svg>

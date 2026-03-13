@@ -45,6 +45,14 @@ npx github:jingw2/zerofuturetech-skills x-essay
 - `tutorial` -> `bold`
 - `brief` -> `minimal-cn`
 
+样式示例：
+
+| Style | 示例 | 适合 |
+| --- | --- | --- |
+| `minimal-cn` | ![minimal-cn](./assets/readme/wechat-style-minimal-cn.svg) | 中文观点长文、专栏、强调阅读舒适度的内容 |
+| `tech-editorial` | ![tech-editorial](./assets/readme/wechat-style-tech-editorial.svg) | AI、产品、工作流、科技分析类文章 |
+| `bold` | ![bold](./assets/readme/wechat-style-bold.svg) | 教程、步骤文、方法论和操作指南 |
+
 ### `high-agency-x-essay-writer`
 
 用于写高 agency、强 hook、强论点推进的 X 长文和 newsletter，支持英文和更自然的中文适配，不直接模仿具体在世作者。
@@ -200,3 +208,7 @@ wechat_style: tech-editorial
 - `SKILL.md` 是 skill 的唯一事实来源
 - `references/` 放按需读取的补充资料
 - 这个仓库主要是给 Codex 安装 skill 用的，不是通用 npm 库
+
+## Star 增长图
+
+[![Star History Chart](https://api.star-history.com/svg?repos=jingw2/zerofuturetech-skills&type=Date)](https://star-history.com/#jingw2/zerofuturetech-skills&Date)
