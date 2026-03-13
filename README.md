@@ -1,112 +1,132 @@
 # Zero Future Tech Skills
 
-Public skill registry for reusable Codex writing and workflow skills from Zero Future Tech.
+Public skill registry for reusable Codex writing and publishing workflows from Zero Future Tech.
+
+## Quick Install
+
+### English
+
+Install the WeChat publisher:
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat
+```
+
+Install the X essay writer:
+
+```bash
+npx github:jingw2/zerofuturetech-skills x-essay
+```
+
+Both commands install to `~/.codex/skills` by default.
+
+### 中文
+
+安装微信公众号发布 skill：
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat
+```
+
+安装 X 长文写作 skill：
+
+```bash
+npx github:jingw2/zerofuturetech-skills x-essay
+```
+
+默认会安装到 `~/.codex/skills`。
 
 ## Skills
-
-### `high-agency-x-essay-writer`
-
-Write high-agency, contrarian long-form X/newsletter essays in English or Chinese without imitating any living author.
-
-What it does:
-
-- Drafts or rewrites long-form essays for X, newsletters, and idea-driven posts
-- Uses strong hooks, clean argument spine, systems-thinking, and actionable endings
-- Supports native-feeling Chinese adaptation instead of English-style literal translation
-- Preserves a safe boundary: inspiration from public creator article patterns, not direct style imitation
-
-Use it when:
-
-- You have raw notes, a journal entry, an outline, or a half-formed argument
-- You want a sharper thesis and stronger article structure
-- You want separate English and Chinese versions of the same core idea
 
 ### `zerofuturetech-wechat-publisher`
 
 Prepare polished WeChat-draft-ready articles from Markdown and image assets, then publish them directly to the WeChat Official Account draft box through the official API.
 
+中文说明：
+把 Markdown 文章和配图整理成适合微信公众号草稿箱的稿件，支持预览、样式控制、封面图和正文图处理，并直接通过官方 API 发到草稿箱。
+
 What it does:
 
-- Cleans Markdown before publishing and removes common WeChat-unfriendly structure issues
-- Resolves title, summary, author, cover image, and inline images
+- Cleans Markdown and resolves title, summary, author, cover image, and inline images
 - Generates `cleaned.md`, `metadata.json`, and `preview.html`
-- Supports multiple preview styles for Chinese WeChat article layouts
+- Supports 3 WeChat-friendly styles: `minimal-cn`, `tech-editorial`, `bold`
 - Renders WeChat-safe inline HTML and publishes drafts through the official API
 
-Use it when:
+Best for:
 
-- You have a Markdown article plus cover/body images and want to publish to 微信公众号草稿箱
-- You care about WeChat draft appearance, not just successful upload
-- You want preview-first workflow before pushing an article to draft
+- Markdown articles that need good WeChat draft appearance
+- Chinese long-form essays, tutorials, and tech analysis posts
+- Preview-first publishing workflow
 
-Available styles:
-
-- `minimal-cn`: cleaner Chinese long-form column style
-- `tech-editorial`: Chinese tech media / analysis style
-- `bold`: stronger hierarchy for tutorials and structured content
-
-Auto recommendation:
+Auto style recommendation:
 
 - `essay` -> `tech-editorial`
 - `tutorial` -> `bold`
 - `brief` -> `minimal-cn`
 
-## Structure
+### `high-agency-x-essay-writer`
 
-```text
-skills/
-  <skill-name>/
-    SKILL.md
-    agents/openai.yaml
-    references/
-    scripts/   # optional
-    assets/    # optional
-```
+Write high-agency, contrarian long-form X/newsletter essays in English or Chinese without imitating any living author.
 
-## Install
+中文说明：
+基于高 agency、强 hook、强论点推进的结构来写 X 长文和 newsletter，同时支持更自然的中文适配，不做对具体在世作者的直接模仿。
 
-推荐直接用一行安装：
+What it does:
+
+- Drafts or rewrites long-form essays for X, newsletters, and idea-driven posts
+- Uses strong hooks, a clean argument spine, systems-thinking, and actionable endings
+- Supports native-feeling Chinese adaptation instead of English-style literal translation
+
+Best for:
+
+- Raw notes, outlines, or half-formed arguments
+- Sharpening thesis and structure
+- Outputting separate English and Chinese versions
+
+## Install Options
+
+### Option 1: shortest commands
 
 ```bash
-npx github:jingw2/zerofuturetech-skills zerofuturetech-wechat-publisher
-npx github:jingw2/zerofuturetech-skills high-agency-x-essay-writer
+npx github:jingw2/zerofuturetech-skills wechat
+npx github:jingw2/zerofuturetech-skills x-essay
 ```
 
-默认会安装到 `~/.codex/skills`。
+Supported aliases:
 
-### Alternative: global install
+- `wechat` -> `zerofuturetech-wechat-publisher`
+- `x-essay` -> `high-agency-x-essay-writer`
+- `essay` -> `high-agency-x-essay-writer`
 
-如果你会频繁装多个 skill，可以先全局安装：
+### Option 2: global install
 
 ```bash
 npm install -g github:jingw2/zerofuturetech-skills
-zerofuturetech-skills zerofuturetech-wechat-publisher
-zerofuturetech-skills high-agency-x-essay-writer
+zerofuturetech-skills wechat
+zerofuturetech-skills x-essay
 ```
 
-也兼容旧写法：
+The old explicit form still works:
 
 ```bash
 zerofuturetech-skills install zerofuturetech-wechat-publisher
 zerofuturetech-skills install high-agency-x-essay-writer
 ```
 
-如果你想安装到别的目录：
+Custom target directory:
 
 ```bash
-npx github:jingw2/zerofuturetech-skills zerofuturetech-wechat-publisher --target ~/.codex/skills
+npx github:jingw2/zerofuturetech-skills wechat --target ~/.codex/skills
 ```
 
-### Alternative: copy manually
-
-也可以直接复制目录：
+### Option 3: copy manually
 
 ```bash
 cp -R skills/high-agency-x-essay-writer ~/.codex/skills/
 cp -R skills/zerofuturetech-wechat-publisher ~/.codex/skills/
 ```
 
-或者用 `rsync`：
+Or with `rsync`:
 
 ```bash
 rsync -a skills/high-agency-x-essay-writer/ ~/.codex/skills/high-agency-x-essay-writer/
@@ -115,14 +135,16 @@ rsync -a skills/zerofuturetech-wechat-publisher/ ~/.codex/skills/zerofuturetech-
 
 ## WeChat Publisher Setup
 
-### WeChat account configuration
+### Config
 
 Preferred config paths:
 
 - Project config: `.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
 - User config: `~/.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- Project env: `.zerofuturetech-skills/.env`
+- User env: `~/.zerofuturetech-skills/.env`
 
-Recommended minimum config:
+Recommended `EXTEND.md`:
 
 ```md
 default_theme: default
@@ -133,23 +155,16 @@ only_fans_can_comment: 0
 content_source_url:
 ```
 
-### API credentials
-
-For API publishing, add WeChat credentials to one of:
-
-- `<project>/.zerofuturetech-skills/.env`
-- `~/.zerofuturetech-skills/.env`
-
-Example:
+Recommended `.env`:
 
 ```bash
 WECHAT_APP_ID=your_wechat_app_id
 WECHAT_APP_SECRET=your_wechat_app_secret
 ```
 
-Legacy `.baoyu-skills` config is still accepted as a migration fallback, but it is no longer required.
+Legacy `.baoyu-skills` config is still accepted as a migration fallback.
 
-## WeChat Publisher Usage
+### Usage
 
 Prepare article files:
 
@@ -157,21 +172,19 @@ Prepare article files:
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style auto --compare-styles
 ```
 
-发布到草稿箱前先看 dry-run：
+Preview the final draft payload first:
 
 ```bash
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
 ```
 
-确认无误后再正式发布：
+Publish to WeChat draft box:
 
 ```bash
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method api
 ```
 
-### Frontmatter
-
-Recommended article frontmatter:
+Recommended frontmatter:
 
 ```yaml
 ---
@@ -189,9 +202,7 @@ wechat_style: tech-editorial
 ---
 ```
 
-### Style selection
-
-Use the CLI:
+Style selection:
 
 ```bash
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style tech-editorial
@@ -199,15 +210,15 @@ python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style bold
 ```
 
-Or set the article frontmatter field:
+Or in frontmatter:
 
 ```yaml
 wechat_style: tech-editorial
 ```
 
-## Conventions
+## Notes
 
 - Each skill is self-contained under `skills/`
 - `SKILL.md` is the source of truth
 - `references/` stores on-demand guidance
-- Keep repo-level docs minimal and skill-focused
+- This repo is optimized for Codex skill installation, not as a general npm library

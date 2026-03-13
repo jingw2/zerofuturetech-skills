@@ -5,13 +5,20 @@ import path from "node:path";
 import os from "node:os";
 
 const args = process.argv.slice(2);
+const skillAliases = {
+  wechat: "zerofuturetech-wechat-publisher",
+  "x-essay": "high-agency-x-essay-writer",
+  essay: "high-agency-x-essay-writer",
+};
 
 function usage() {
   console.log(`Usage:
-  zerofuturetech-skills <skill-name> [--target <dir>]
-  zerofuturetech-skills install <skill-name> [--target <dir>]
+  zerofuturetech-skills <skill-name-or-alias> [--target <dir>]
+  zerofuturetech-skills install <skill-name-or-alias> [--target <dir>]
 
 Examples:
+  zerofuturetech-skills wechat
+  zerofuturetech-skills x-essay
   zerofuturetech-skills high-agency-x-essay-writer
   zerofuturetech-skills install high-agency-x-essay-writer
   zerofuturetech-skills install high-agency-x-essay-writer --target ~/.codex/skills`);
@@ -46,6 +53,8 @@ if (!skillName) {
   usage();
   process.exit(1);
 }
+
+skillName = skillAliases[skillName] || skillName;
 
 let targetRoot = path.join(os.homedir(), ".codex", "skills");
 const targetFlagIndex = args.indexOf("--target");
