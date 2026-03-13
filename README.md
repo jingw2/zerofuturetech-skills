@@ -1,10 +1,10 @@
 # Zero Future Tech Skills
 
+[中文](./README.zh-CN.md)
+
 Public skill registry for reusable Codex writing and publishing workflows from Zero Future Tech.
 
 ## Quick Install
-
-### English
 
 Install the WeChat publisher:
 
@@ -20,30 +20,11 @@ npx github:jingw2/zerofuturetech-skills x-essay
 
 Both commands install to `~/.codex/skills` by default.
 
-### 中文
-
-安装微信公众号发布 skill：
-
-```bash
-npx github:jingw2/zerofuturetech-skills wechat
-```
-
-安装 X 长文写作 skill：
-
-```bash
-npx github:jingw2/zerofuturetech-skills x-essay
-```
-
-默认会安装到 `~/.codex/skills`。
-
 ## Skills
 
 ### `zerofuturetech-wechat-publisher`
 
 Prepare polished WeChat-draft-ready articles from Markdown and image assets, then publish them directly to the WeChat Official Account draft box through the official API.
-
-中文说明：
-把 Markdown 文章和配图整理成适合微信公众号草稿箱的稿件，支持预览、样式控制、封面图和正文图处理，并直接通过官方 API 发到草稿箱。
 
 What it does:
 
@@ -67,9 +48,6 @@ Auto style recommendation:
 ### `high-agency-x-essay-writer`
 
 Write high-agency, contrarian long-form X/newsletter essays in English or Chinese without imitating any living author.
-
-中文说明：
-基于高 agency、强 hook、强论点推进的结构来写 X 长文和 newsletter，同时支持更自然的中文适配，不做对具体在世作者的直接模仿。
 
 What it does:
 
@@ -188,9 +166,9 @@ Recommended frontmatter:
 
 ```yaml
 ---
-title: 文章标题
-author: 作者名
-summary: 一句话摘要
+title: Article title
+author: Author name
+summary: One-line summary
 cover: imgs/cover.png
 article_type: essay
 content_source_url: https://example.com/original-post

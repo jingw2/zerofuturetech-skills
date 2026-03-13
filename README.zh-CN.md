@@ -1,0 +1,202 @@
+# Zero Future Tech Skills
+
+[English](./README.md)
+
+Zero Future Tech 的公开 Codex skill 仓库，主要放可复用的写作和发布工作流。
+
+## 快速安装
+
+安装微信公众号发布 skill：
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat
+```
+
+安装 X 长文写作 skill：
+
+```bash
+npx github:jingw2/zerofuturetech-skills x-essay
+```
+
+默认会安装到 `~/.codex/skills`。
+
+## Skills
+
+### `zerofuturetech-wechat-publisher`
+
+把 Markdown 文章和配图整理成适合微信公众号草稿箱的稿件，支持预览、样式控制、封面图和正文图处理，并直接通过官方 API 发到草稿箱。
+
+它可以做的事：
+
+- 清理 Markdown，解析标题、摘要、作者、封面图和正文图片
+- 生成 `cleaned.md`、`metadata.json` 和 `preview.html`
+- 支持 3 种更适合微信公众号的样式：`minimal-cn`、`tech-editorial`、`bold`
+- 渲染成适合微信草稿箱的内联 HTML，并通过官方 API 发布
+
+适合：
+
+- 想把 Markdown 文章发到微信公众号草稿箱
+- 在意排版观感，而不只是“能发成功”
+- 希望先预览再发布
+
+样式自动推荐：
+
+- `essay` -> `tech-editorial`
+- `tutorial` -> `bold`
+- `brief` -> `minimal-cn`
+
+### `high-agency-x-essay-writer`
+
+用于写高 agency、强 hook、强论点推进的 X 长文和 newsletter，支持英文和更自然的中文适配，不直接模仿具体在世作者。
+
+它可以做的事：
+
+- 基于笔记、提纲、半成品观点生成长文
+- 强化 hook、论点推进、系统感和结尾行动性
+- 分别输出英文版和中文版，而不是生硬直译
+
+适合：
+
+- 原始笔记、提纲、半成品想法
+- 想把观点打磨得更锋利
+- 想分别输出中英文两个版本
+
+## 安装方式
+
+### 方式 1：最短命令
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat
+npx github:jingw2/zerofuturetech-skills x-essay
+```
+
+支持这些别名：
+
+- `wechat` -> `zerofuturetech-wechat-publisher`
+- `x-essay` -> `high-agency-x-essay-writer`
+- `essay` -> `high-agency-x-essay-writer`
+
+### 方式 2：全局安装
+
+```bash
+npm install -g github:jingw2/zerofuturetech-skills
+zerofuturetech-skills wechat
+zerofuturetech-skills x-essay
+```
+
+旧写法也兼容：
+
+```bash
+zerofuturetech-skills install zerofuturetech-wechat-publisher
+zerofuturetech-skills install high-agency-x-essay-writer
+```
+
+如果想安装到其他目录：
+
+```bash
+npx github:jingw2/zerofuturetech-skills wechat --target ~/.codex/skills
+```
+
+### 方式 3：手动复制
+
+```bash
+cp -R skills/high-agency-x-essay-writer ~/.codex/skills/
+cp -R skills/zerofuturetech-wechat-publisher ~/.codex/skills/
+```
+
+或者用 `rsync`：
+
+```bash
+rsync -a skills/high-agency-x-essay-writer/ ~/.codex/skills/high-agency-x-essay-writer/
+rsync -a skills/zerofuturetech-wechat-publisher/ ~/.codex/skills/zerofuturetech-wechat-publisher/
+```
+
+## 微信公众号发布 Skill 配置
+
+### 配置文件
+
+推荐配置路径：
+
+- 项目级配置：`.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- 用户级配置：`~/.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- 项目级环境变量：`.zerofuturetech-skills/.env`
+- 用户级环境变量：`~/.zerofuturetech-skills/.env`
+
+推荐的 `EXTEND.md`：
+
+```md
+default_theme: default
+default_color: green
+default_author: Zero Future Tech
+need_open_comment: 1
+only_fans_can_comment: 0
+content_source_url:
+```
+
+推荐的 `.env`：
+
+```bash
+WECHAT_APP_ID=your_wechat_app_id
+WECHAT_APP_SECRET=your_wechat_app_secret
+```
+
+旧的 `.baoyu-skills` 配置仍然兼容，方便迁移。
+
+### 使用方式
+
+先准备文章：
+
+```bash
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style auto --compare-styles
+```
+
+先看 dry-run：
+
+```bash
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
+```
+
+确认后正式发布到草稿箱：
+
+```bash
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method api
+```
+
+推荐 frontmatter：
+
+```yaml
+---
+title: 文章标题
+author: 作者名
+summary: 一句话摘要
+cover: imgs/cover.png
+article_type: essay
+content_source_url: https://example.com/original-post
+need_open_comment: 1
+only_fans_can_comment: 0
+wechat_theme: default
+wechat_color: green
+wechat_style: tech-editorial
+---
+```
+
+样式选择：
+
+```bash
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style tech-editorial
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style minimal-cn
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style bold
+```
+
+或者在 frontmatter 里写：
+
+```yaml
+wechat_style: tech-editorial
+```
+
+## 说明
+
+- 每个 skill 都是 `skills/` 下的独立目录
+- `SKILL.md` 是 skill 的唯一事实来源
+- `references/` 放按需读取的补充资料
+- 这个仓库主要是给 Codex 安装 skill 用的，不是通用 npm 库
