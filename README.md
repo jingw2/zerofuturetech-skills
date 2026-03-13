@@ -23,7 +23,7 @@ Use it when:
 
 ### `zerofuturetech-wechat-publisher`
 
-Prepare polished WeChat-draft-ready articles from Markdown and image assets, then publish them to the WeChat Official Account draft box by reusing `baoyu-post-to-wechat` as the publishing engine.
+Prepare polished WeChat-draft-ready articles from Markdown and image assets, then publish them directly to the WeChat Official Account draft box through the official API.
 
 What it does:
 
@@ -31,7 +31,7 @@ What it does:
 - Resolves title, summary, author, cover image, and inline images
 - Generates `cleaned.md`, `metadata.json`, and `preview.html`
 - Supports multiple preview styles for Chinese WeChat article layouts
-- Hands off final publishing to `baoyu-post-to-wechat` using API or browser mode
+- Renders WeChat-safe inline HTML and publishes drafts through the official API
 
 Use it when:
 
@@ -107,41 +107,30 @@ zerofuturetech-skills install zerofuturetech-wechat-publisher --target ~/.codex/
 
 ## WeChat Publisher Setup
 
-`zerofuturetech-wechat-publisher` depends on `baoyu-post-to-wechat` for final publishing.
-
-Install the dependency first:
-
-```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo JimLiu/baoyu-skills \
-  --path skills/baoyu-post-to-wechat
-```
-
 ### WeChat account configuration
 
-Configure `baoyu-post-to-wechat` via:
+Preferred config paths:
 
-- Project config: `.baoyu-skills/baoyu-post-to-wechat/EXTEND.md`
-- User config: `~/.baoyu-skills/baoyu-post-to-wechat/EXTEND.md`
+- Project config: `.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- User config: `~/.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
 
 Recommended minimum config:
 
 ```md
 default_theme: default
 default_color: green
-default_publish_method: api
 default_author: Zero Future Tech
 need_open_comment: 1
 only_fans_can_comment: 0
-chrome_profile_path:
+content_source_url:
 ```
 
 ### API credentials
 
 For API publishing, add WeChat credentials to one of:
 
-- `<project>/.baoyu-skills/.env`
-- `~/.baoyu-skills/.env`
+- `<project>/.zerofuturetech-skills/.env`
+- `~/.zerofuturetech-skills/.env`
 
 Example:
 
@@ -150,13 +139,7 @@ WECHAT_APP_ID=your_wechat_app_id
 WECHAT_APP_SECRET=your_wechat_app_secret
 ```
 
-### Browser publishing
-
-If you prefer browser mode:
-
-- install Chrome
-- log in to the target WeChat Official Account
-- configure `chrome_profile_path` if you want isolated account sessions
+Legacy `.baoyu-skills` config is still accepted as a migration fallback, but it is no longer required.
 
 ## WeChat Publisher Usage
 
@@ -170,7 +153,7 @@ Publish after preview:
 
 ```bash
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method api
-python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method browser --dry-run
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
 ```
 
 ### Frontmatter
@@ -184,6 +167,9 @@ author: 作者名
 summary: 一句话摘要
 cover: imgs/cover.png
 article_type: essay
+content_source_url: https://example.com/original-post
+need_open_comment: 1
+only_fans_can_comment: 0
 wechat_theme: default
 wechat_color: green
 wechat_style: tech-editorial

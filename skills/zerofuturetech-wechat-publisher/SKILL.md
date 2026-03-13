@@ -1,6 +1,6 @@
 ---
 name: zerofuturetech-wechat-publisher
-description: Prepare polished, WeChat-draft-ready articles from Markdown and image assets, then publish them to WeChat Official Account draft box by reusing baoyu-post-to-wechat as the publishing engine. Use when Codex receives a Markdown article, article images, cover image, or mixed writing assets and needs to optimize typography, spacing, headings, image rhythm, frontmatter, and WeChat metadata before sending the result to 微信公众号草稿箱.
+description: Prepare polished, WeChat-draft-ready articles from Markdown and image assets, then publish them directly to the WeChat Official Account draft box through the official API. Use when Codex receives a Markdown article, article images, cover image, or mixed writing assets and needs to optimize typography, spacing, headings, image rhythm, frontmatter, and WeChat metadata before sending the result to 微信公众号草稿箱.
 ---
 
 # Zerofuturetech Wechat Publisher
@@ -8,18 +8,18 @@ description: Prepare polished, WeChat-draft-ready articles from Markdown and ima
 ## Overview
 
 Turn a Markdown article plus optional images into a WeChat-optimized article draft that looks good inside 微信公众号草稿箱 rather than merely rendering without errors.
-This skill is layout-first: it improves structure, Chinese typography, heading rhythm, image placement, and metadata before delegating final publishing to `baoyu-post-to-wechat`.
+This skill is layout-first: it improves structure, Chinese typography, heading rhythm, image placement, and metadata before publishing directly through the WeChat draft API.
 
-Read [references/wechat-layout-rules.md](references/wechat-layout-rules.md) for the layout rules, [references/article-prep.md](references/article-prep.md) for Markdown and image preparation, and [references/baoyu-integration.md](references/baoyu-integration.md) for the final publishing handoff.
+Read [references/wechat-layout-rules.md](references/wechat-layout-rules.md) for the layout rules, [references/article-prep.md](references/article-prep.md) for Markdown and image preparation, and [references/wechat-api-publishing.md](references/wechat-api-publishing.md) for the direct publishing flow.
 
 Runnable helpers:
 
 - `scripts/prepare_article.py`: clean Markdown, resolve cover/images, generate `cleaned.md`, `metadata.json`, and `preview.html`
-- `scripts/publish_wechat.py`: read `metadata.json` and call `baoyu-post-to-wechat`
+- `scripts/publish_wechat.py`: read `metadata.json`, render WeChat-safe inline HTML, upload assets, and create a draft through the official WeChat API
 
 ## Architecture
 
-Use a two-layer model:
+Use a single-skill model:
 
 - This skill owns the preparation layer:
   - article cleanup
@@ -27,13 +27,14 @@ Use a two-layer model:
   - image and cover resolution
   - WeChat-specific layout choices
   - preview-oriented HTML expectations
-- `baoyu-post-to-wechat` remains the publishing engine:
-  - account config
-  - API or browser delivery
-  - draft box upload
-  - WeChat credentials and Chrome profile handling
+- This skill also owns the API publishing layer:
+  - credential loading
+  - access token retrieval
+  - inline image upload
+  - cover upload
+  - draft creation
 
-Do not reimplement WeChat transport unless the user explicitly asks for a standalone replacement.
+Keep the browser publishing path optional and separate from the core workflow.
 
 ## Workflow
 
@@ -56,7 +57,7 @@ Resolve these fields before layout work:
 - summary / digest
 - cover image
 - inline images
-- publishing method preference: `api` or `browser`
+- publishing method preference: `api`
 
 If the input is raw text, save it to a Markdown file before proceeding.
 
@@ -93,18 +94,19 @@ Use the rules in [references/wechat-layout-rules.md](references/wechat-layout-ru
 - Control image rhythm so the article does not become text wall -> image dump -> text wall
 - Treat cover image and summary as first-class publishing metadata
 
-### 5. Hand off to `baoyu-post-to-wechat`
+### 5. Publish through the WeChat draft API
 
-After content prep, publish through `baoyu-post-to-wechat` instead of bypassing it.
+After content prep, publish through the official WeChat API.
 
-Preferred handoff:
+Preferred flow:
 
-1. Markdown input stays Markdown
-2. Theme/color defaults are resolved intentionally, not left accidental
+1. Markdown input stays Markdown until publish time
+2. Theme/color/style defaults are resolved intentionally
 3. Cover image is confirmed before API publish
-4. Use `baoyu-post-to-wechat` for final draft upload
+4. Inline images are uploaded and rewritten to WeChat-hosted URLs
+5. The final draft is created through `draft/add`
 
-If the article needs a custom HTML pass before publishing, ensure the HTML still remains compatible with WeChat draft rendering and image handling.
+If the article needs a custom HTML pass before publishing, keep the generated HTML simple and inline-styled so it remains compatible with WeChat draft rendering.
 
 ## Commands
 
@@ -121,7 +123,7 @@ Publish a prepared article:
 
 ```bash
 python3 scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method api
-python3 scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method browser --dry-run
+python3 scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
 ```
 
 ## Frontmatter Contract
@@ -135,6 +137,9 @@ author: 作者名
 summary: 一句话摘要
 cover: imgs/cover.png
 article_type: essay
+content_source_url: https://example.com/original-post
+need_open_comment: 1
+only_fans_can_comment: 0
 wechat_theme: default
 wechat_color: green
 wechat_style: tech-editorial
@@ -191,7 +196,8 @@ Before publishing, check:
 - Paragraph spacing is comfortable on mobile
 - Lists, quotes, and code blocks do not break the visual rhythm
 - Cover image and summary are resolved
-- The final workflow still uses `baoyu-post-to-wechat` for draft submission
+- API credentials are available
+- The final workflow stays inside this skill
 
 ## Output Modes
 
@@ -199,6 +205,17 @@ Use the lightest mode that satisfies the request:
 
 - Prep only: cleaned Markdown plus publishing notes
 - Preview mode: WeChat-optimized HTML recommendation plus layout fixes
-- Publish mode: prepared article plus handoff to `baoyu-post-to-wechat`
+- Publish mode: prepared article plus direct draft creation through the WeChat API
+
+## Configuration
+
+Preferred config paths:
+
+- `.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- `~/.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- `.zerofuturetech-skills/.env`
+- `~/.zerofuturetech-skills/.env`
+
+Legacy `.baoyu-skills` config is still read as a fallback for migration, but it is no longer required.
 
 If the user asks to optimize for WeChat before publishing, do the prep and preview steps first instead of jumping straight to upload.

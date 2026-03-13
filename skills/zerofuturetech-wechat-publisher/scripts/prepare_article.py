@@ -527,6 +527,9 @@ def main() -> None:
         "wechat_theme": theme,
         "wechat_style": style,
     }
+    for key in ("content_source_url", "need_open_comment", "only_fans_can_comment"):
+        if frontmatter.get(key):
+            cleaned_frontmatter[key] = frontmatter[key]
     if color:
         cleaned_frontmatter["wechat_color"] = color
 
@@ -590,7 +593,7 @@ def main() -> None:
         "publish_notes": [
             "Review preview.html before publishing.",
             "Confirm cover image is correct for API publishing.",
-            "Use browser mode if visual paste verification is needed.",
+            "Configure WECHAT_APP_ID and WECHAT_APP_SECRET before direct API publishing.",
         ],
     }
     metadata_path = output_dir / "metadata.json"
