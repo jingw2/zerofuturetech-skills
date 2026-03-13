@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZFT WeChat Publisher"
+  short_description: "Publish polished Markdown articles to WeChat drafts"
+  default_prompt: "Use $zerofuturetech-wechat-publisher to turn my Markdown article and images into a polished WeChat draft-ready article and publish it to the WeChat Official Account draft box."
