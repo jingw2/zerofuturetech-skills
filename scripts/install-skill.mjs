@@ -8,9 +8,11 @@ const args = process.argv.slice(2);
 
 function usage() {
   console.log(`Usage:
+  zerofuturetech-skills <skill-name> [--target <dir>]
   zerofuturetech-skills install <skill-name> [--target <dir>]
 
 Examples:
+  zerofuturetech-skills high-agency-x-essay-writer
   zerofuturetech-skills install high-agency-x-essay-writer
   zerofuturetech-skills install high-agency-x-essay-writer --target ~/.codex/skills`);
 }
@@ -32,9 +34,15 @@ if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
   process.exit(0);
 }
 
-const [command, skillName] = args;
+let command = args[0];
+let skillName = args[1];
 
-if (command !== "install" || !skillName) {
+if (command !== "install") {
+  skillName = command;
+  command = "install";
+}
+
+if (!skillName) {
   usage();
   process.exit(1);
 }

@@ -65,44 +65,52 @@ skills/
 
 ## Install
 
-### Option 1: Copy locally
+推荐直接用一行安装：
 
-Copy a skill folder into your local Codex skills directory:
+```bash
+npx github:jingw2/zerofuturetech-skills zerofuturetech-wechat-publisher
+npx github:jingw2/zerofuturetech-skills high-agency-x-essay-writer
+```
+
+默认会安装到 `~/.codex/skills`。
+
+### Alternative: global install
+
+如果你会频繁装多个 skill，可以先全局安装：
+
+```bash
+npm install -g github:jingw2/zerofuturetech-skills
+zerofuturetech-skills zerofuturetech-wechat-publisher
+zerofuturetech-skills high-agency-x-essay-writer
+```
+
+也兼容旧写法：
+
+```bash
+zerofuturetech-skills install zerofuturetech-wechat-publisher
+zerofuturetech-skills install high-agency-x-essay-writer
+```
+
+如果你想安装到别的目录：
+
+```bash
+npx github:jingw2/zerofuturetech-skills zerofuturetech-wechat-publisher --target ~/.codex/skills
+```
+
+### Alternative: copy manually
+
+也可以直接复制目录：
 
 ```bash
 cp -R skills/high-agency-x-essay-writer ~/.codex/skills/
 cp -R skills/zerofuturetech-wechat-publisher ~/.codex/skills/
 ```
 
-Or sync it:
+或者用 `rsync`：
 
 ```bash
 rsync -a skills/high-agency-x-essay-writer/ ~/.codex/skills/high-agency-x-essay-writer/
 rsync -a skills/zerofuturetech-wechat-publisher/ ~/.codex/skills/zerofuturetech-wechat-publisher/
-```
-
-### Option 2: Install with npm from GitHub
-
-Install the repo as a package and copy the skill into `~/.codex/skills`:
-
-```bash
-npx github:jingw2/zerofuturetech-skills install high-agency-x-essay-writer
-npx github:jingw2/zerofuturetech-skills install zerofuturetech-wechat-publisher
-```
-
-You can also install globally first:
-
-```bash
-npm install -g github:jingw2/zerofuturetech-skills
-zerofuturetech-skills install high-agency-x-essay-writer
-zerofuturetech-skills install zerofuturetech-wechat-publisher
-```
-
-Optional target directory:
-
-```bash
-zerofuturetech-skills install high-agency-x-essay-writer --target ~/.codex/skills
-zerofuturetech-skills install zerofuturetech-wechat-publisher --target ~/.codex/skills
 ```
 
 ## WeChat Publisher Setup
@@ -149,11 +157,16 @@ Prepare article files:
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style auto --compare-styles
 ```
 
-Publish after preview:
+发布到草稿箱前先看 dry-run：
+
+```bash
+python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
+```
+
+确认无误后再正式发布：
 
 ```bash
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method api
-python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
 ```
 
 ### Frontmatter
