@@ -24,6 +24,18 @@ npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
 ```
 
+安装图文一体化 HTML skill：
+
+```bash
+npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
+```
+
+安装 thumbnail 和文章配图 skill：
+
+```bash
+npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
+```
+
 默认会安装到 `~/.codex/skills`。
 
 其他平台安装示例：
@@ -34,6 +46,38 @@ npx github:jingw2/zerofuturetech-skills wechat --platform claude
 ```
 
 ## Skills
+
+### `illustrated-article-html-studio`
+
+把主题或 Markdown 草稿直接整理成完整的图文一体化文章包，输出文章 Markdown、图片规划、可选生成图片和最终独立 HTML。
+
+它可以做的事：
+
+- 输出 `article.md`、`image-plan.json`、图片资产和 `article.html`
+- 支持 OpenAI、Gemini 等图片 provider
+- 把文章结构、封面图、分节图和最终 HTML 排版串成一条链路
+
+适合：
+
+- 图文一体化文章 demo
+- 发布前预览页
+- 从内容到页面的一体化产物
+
+### `article-thumbnail-illustrator`
+
+专门生成 thumbnail 和正文配图的 skill，适合文章封面图、newsletter 配图和分节插图。
+
+它可以做的事：
+
+- 输出 thumbnail prompt 和 section image prompts
+- 支持 OpenAI、Gemini、Replicate 出图
+- 用更像编辑部视觉方向的方式做配图，而不是泛化 AI prompt
+
+适合：
+
+- 文章缩略图
+- 分节插图
+- 更有“活人感”的文章视觉系统
 
 ### `zerofuturetech-wechat-publisher`
 
@@ -89,6 +133,8 @@ npx github:jingw2/zerofuturetech-skills wechat --platform claude
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
+npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
+npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 ```
 
 支持这些别名：

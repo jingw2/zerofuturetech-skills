@@ -1,0 +1,4 @@
+interface:
+  display_name: "Illustrated Article HTML Studio"
+  short_description: "Generate article copy, images, and integrated HTML"
+  default_prompt: "Use $illustrated-article-html-studio to turn my topic or Markdown draft into a polished illustrated HTML article with generated images and editorial layout."

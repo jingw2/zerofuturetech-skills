@@ -24,6 +24,18 @@ Install the X essay writer:
 npx github:jingw2/zerofuturetech-skills x-essay
 ```
 
+Install the illustrated HTML article studio:
+
+```bash
+npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
+```
+
+Install the thumbnail + article image skill:
+
+```bash
+npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
+```
+
 Both commands install to `~/.codex/skills` by default.
 
 Other platforms:
@@ -34,6 +46,38 @@ npx github:jingw2/zerofuturetech-skills wechat --platform claude
 ```
 
 ## Skills
+
+### `illustrated-article-html-studio`
+
+Turn a topic or Markdown draft into a complete illustrated editorial article bundle with article copy, image planning, optional generated images, and integrated standalone HTML.
+
+What it does:
+
+- Produces article Markdown, `image-plan.json`, assets, and `article.html`
+- Supports configurable image providers including OpenAI and Gemini
+- Combines article structure, generated cover images, section images, and polished HTML layout
+
+Best for:
+
+- end-to-end article packages
+- editorial demos
+- publication preview pages
+
+### `article-thumbnail-illustrator`
+
+Generate thumbnails and inline article illustration sets for essays, newsletters, and editorial pages.
+
+What it does:
+
+- Produces thumbnail prompts and section-image prompts
+- Supports OpenAI, Gemini, and Replicate image generation
+- Uses a stronger editorial thumbnail-direction workflow instead of generic image prompting
+
+Best for:
+
+- article thumbnails
+- section illustrations
+- image systems that need more human editorial direction
 
 ### `zerofuturetech-wechat-publisher`
 
@@ -89,6 +133,8 @@ Best for:
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
+npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
+npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 ```
 
 Supported aliases:

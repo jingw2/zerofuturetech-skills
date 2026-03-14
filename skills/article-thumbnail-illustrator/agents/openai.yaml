@@ -1,0 +1,4 @@
+interface:
+  display_name: "Article Thumbnail Illustrator"
+  short_description: "Generate thumbnails and article illustration images"
+  default_prompt: "Use $article-thumbnail-illustrator to generate a strong thumbnail and section image set for this article, with prompts or actual images."
