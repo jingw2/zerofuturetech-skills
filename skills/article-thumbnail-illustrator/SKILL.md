@@ -109,7 +109,6 @@ If not:
 python3 scripts/build_article_images.py article.md --dry-run
 python3 scripts/build_article_images.py article.md --provider openai
 python3 scripts/build_article_images.py article.md --provider gemini
-python3 scripts/build_article_images.py article.md --provider replicate --model google/nano-banana-pro
 ```
 
 ## Frontmatter Contract

@@ -5,8 +5,6 @@ import base64
 import json
 import os
 import re
-import shutil
-import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -24,7 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--summary", help="Override summary")
     parser.add_argument(
         "--provider",
-        choices=["openai", "gemini", "replicate", "none"],
+        choices=["openai", "gemini", "none"],
         help="Image provider",
     )
     parser.add_argument("--model", help="Override image model")
@@ -134,7 +132,6 @@ def resolve_model(provider: str, frontmatter: Dict[str, str], settings: Dict[str
     defaults = {
         "openai": settings.get("default_openai_model", "gpt-image-1"),
         "gemini": settings.get("default_gemini_model", "gemini-3-pro-image-preview"),
-        "replicate": settings.get("default_replicate_model", "google/nano-banana-pro"),
         "none": "",
     }
     return defaults.get(provider, "")
@@ -181,12 +178,6 @@ def request_json(url: str, payload: Optional[dict], headers: Optional[Dict[str, 
         raise SystemExit(f"HTTP error {exc.code}: {details}") from exc
 
 
-def download_file(url: str, output_path: Path, headers: Optional[Dict[str, str]] = None) -> None:
-    req = urllib.request.Request(url, headers=headers or {})
-    with urllib.request.urlopen(req, timeout=120) as resp:
-        output_path.write_bytes(resp.read())
-
-
 def generate_openai(prompt: str, model: str, size: str, output_path: Path, api_key: str) -> None:
     result = request_json(
         "https://api.openai.com/v1/images/generations",
@@ -214,36 +205,6 @@ def generate_gemini(prompt: str, model: str, output_path: Path, api_key: str) ->
     raise SystemExit("Gemini did not return image data.")
 
 
-def parse_replicate_model(model: str) -> Tuple[str, str]:
-    if "/" not in model:
-        raise SystemExit(f"Replicate model must be owner/name, got: {model}")
-    owner, name = model.split("/", 1)
-    return owner, name
-
-
-def generate_replicate(prompt: str, model: str, aspect: str, output_path: Path, api_token: str) -> None:
-    owner, name = parse_replicate_model(model)
-    payload = {"input": {"prompt": prompt, "aspect_ratio": aspect}}
-    result = request_json(
-        f"https://api.replicate.com/v1/models/{owner}/{name}/predictions",
-        payload,
-        {"Authorization": f"Bearer {api_token}", "Prefer": "wait=60"},
-        timeout=120,
-    )
-    prediction = result
-    get_url = prediction.get("urls", {}).get("get")
-    while prediction.get("status") in ("starting", "processing") and get_url:
-        time.sleep(2)
-        prediction = request_json(get_url, None, {"Authorization": f"Bearer {api_token}"}, timeout=120)
-    if prediction.get("status") != "succeeded":
-        raise SystemExit(f"Replicate prediction failed with status {prediction.get('status')}: {prediction.get('error', '')}")
-    output = prediction.get("output")
-    image_url = output[0] if isinstance(output, list) else output
-    if not image_url:
-        raise SystemExit("Replicate did not return an image URL.")
-    download_file(image_url, output_path, {"Authorization": f"Bearer {api_token}"})
-
-
 def write_prompt_file(path: Path, title: str, prompt: str, meta: Dict[str, str]) -> None:
     frontmatter = ["---"] + [f"{k}: {v}" for k, v in meta.items() if v] + ["---", ""]
     path.write_text("\n".join(frontmatter) + prompt + "\n", encoding="utf-8")
@@ -265,12 +226,6 @@ def generate_asset(prompt: str, provider: str, model: str, size: str, aspect: st
         if not api_key:
             return {"status": "planned", "reason": "missing GEMINI_API_KEY", "path": ""}
         generate_gemini(prompt, model, output_path, api_key)
-        return {"status": "generated", "reason": "", "path": str(output_path)}
-    if provider == "replicate":
-        api_token = settings.get("REPLICATE_API_TOKEN")
-        if not api_token:
-            return {"status": "planned", "reason": "missing REPLICATE_API_TOKEN", "path": ""}
-        generate_replicate(prompt, model, aspect, output_path, api_token)
         return {"status": "generated", "reason": "", "path": str(output_path)}
     return {"status": "planned", "reason": f"unsupported provider {provider}", "path": ""}
 

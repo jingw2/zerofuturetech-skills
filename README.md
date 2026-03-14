@@ -70,7 +70,7 @@ Generate thumbnails and inline article illustration sets for essays, newsletters
 What it does:
 
 - Produces thumbnail prompts and section-image prompts
-- Supports OpenAI, Gemini, and Replicate image generation
+- Supports OpenAI and Gemini image generation
 - Uses a stronger editorial thumbnail-direction workflow instead of generic image prompting
 
 Best for:

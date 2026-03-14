@@ -70,7 +70,7 @@ npx github:jingw2/zerofuturetech-skills wechat --platform claude
 它可以做的事：
 
 - 输出 thumbnail prompt 和 section image prompts
-- 支持 OpenAI、Gemini、Replicate 出图
+- 支持 OpenAI、Gemini 出图
 - 用更像编辑部视觉方向的方式做配图，而不是泛化 AI prompt
 
 适合：
