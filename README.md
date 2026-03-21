@@ -2,92 +2,40 @@
 
 [中文](./README.zh-CN.md)
 
-Public skill registry for reusable Codex writing and publishing workflows from Zero Future Tech.
-
-Supported targets:
-
-- Codex
-- OpenClaw
-- Claude Code
+Reusable skills for [Codex](https://openai.com/codex), [OpenClaw](https://openclaw.ai), and [Claude Code](https://claude.ai/code) — content writing, image generation, and publishing workflows.
 
 ## Quick Install
 
-Install the WeChat publisher:
-
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat
-```
-
-Install the X essay writer:
-
-```bash
 npx github:jingw2/zerofuturetech-skills x-essay
-```
-
-Install the illustrated HTML article studio:
-
-```bash
 npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
-```
-
-Install the thumbnail + article image skill:
-
-```bash
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 ```
 
-All commands install to `~/.codex/skills` by default. For other platforms:
+Installs to `~/.codex/skills` by default. Use `--platform` to target other platforms:
 
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
 npx github:jingw2/zerofuturetech-skills wechat --platform claude
 ```
 
-**New in v0.1.0**: List all skills and view documentation:
+## CLI Reference
 
-```bash
-npx github:jingw2/zerofuturetech-skills --list
-npx github:jingw2/zerofuturetech-skills --help
-npx github:jingw2/zerofuturetech-skills wechat --dry-run
-```
+| Command | Description |
+| --- | --- |
+| `zerofuturetech-skills --list` | List all available skills |
+| `zerofuturetech-skills --version` | Show version |
+| `zerofuturetech-skills --help` | Show help |
+| `zerofuturetech-skills <skill> --dry-run` | Preview install without copying |
+| `zerofuturetech-skills <skill> --platform <p>` | Install to `codex`, `openclaw`, or `claude` |
+| `zerofuturetech-skills <skill> --target <dir>` | Install to a custom directory |
 
 ## Skills
 
-### `illustrated-article-html-studio`
-
-Turn a topic or Markdown draft into a complete illustrated editorial article bundle with article copy, image planning, optional generated images, and integrated standalone HTML.
-
-What it does:
-
-- Produces article Markdown, `image-plan.json`, assets, and `article.html`
-- Supports configurable image providers including OpenAI and Gemini
-- Combines article structure, generated cover images, section images, and polished HTML layout
-
-Best for:
-
-- end-to-end article packages
-- editorial demos
-- publication preview pages
-
-### `article-thumbnail-illustrator`
-
-Generate thumbnails and inline article illustration sets for essays, newsletters, and editorial pages.
-
-What it does:
-
-- Produces thumbnail prompts and section-image prompts
-- Supports OpenAI and Gemini image generation
-- Uses a stronger editorial thumbnail-direction workflow instead of generic image prompting
-
-Best for:
-
-- article thumbnails
-- section illustrations
-- image systems that need more human editorial direction
-
 ### `zerofuturetech-wechat-publisher`
 
-Prepare polished WeChat-draft-ready articles from Markdown and image assets, then publish them directly to the WeChat Official Account draft box through the official API.
+Prepare polished WeChat-draft-ready articles from Markdown and image assets, then publish directly to the WeChat Official Account draft box through the official API.
 
 What it does:
 
@@ -104,9 +52,9 @@ Best for:
 
 Auto style recommendation:
 
-- `essay` -> `tech-editorial`
-- `tutorial` -> `bold`
-- `brief` -> `minimal-cn`
+- `essay` → `tech-editorial`
+- `tutorial` → `bold`
+- `brief` → `minimal-cn`
 
 Style preview:
 
@@ -132,9 +80,41 @@ Best for:
 - Sharpening thesis and structure
 - Outputting separate English and Chinese versions
 
+### `illustrated-article-html-studio`
+
+Turn a topic or Markdown draft into a complete illustrated editorial article bundle with article copy, image planning, optional generated images, and integrated standalone HTML.
+
+What it does:
+
+- Produces article Markdown, `image-plan.json`, assets, and `article.html`
+- Supports configurable image providers including OpenAI and Gemini
+- Combines article structure, generated cover images, section images, and polished HTML layout
+
+Best for:
+
+- End-to-end article packages
+- Editorial demos
+- Publication preview pages
+
+### `article-thumbnail-illustrator`
+
+Generate thumbnails and inline article illustration sets for essays, newsletters, and editorial pages.
+
+What it does:
+
+- Produces thumbnail prompts and section-image prompts
+- Supports OpenAI and Gemini image generation
+- Uses a stronger editorial thumbnail-direction workflow instead of generic image prompting
+
+Best for:
+
+- Article thumbnails
+- Section illustrations
+- Image systems that need more human editorial direction
+
 ## Install Options
 
-### Option 1: shortest commands
+### Option 1: npx (recommended)
 
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat
@@ -145,60 +125,32 @@ npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 
 Supported aliases:
 
-- `wechat` -> `zerofuturetech-wechat-publisher`
-- `x-essay` -> `high-agency-x-essay-writer`
-- `essay` -> `high-agency-x-essay-writer`
+| Alias | Skill |
+| --- | --- |
+| `wechat` | `zerofuturetech-wechat-publisher` |
+| `x-essay`, `essay` | `high-agency-x-essay-writer` |
 
 Supported platforms:
 
-- `codex` -> installs to `~/.codex/skills`
-- `openclaw` -> installs to `~/.openclaw/skills`
-- `claude` -> installs to `~/.claude/agents`
-
-Examples:
-
-```bash
-npx github:jingw2/zerofuturetech-skills wechat --platform codex
-npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
-npx github:jingw2/zerofuturetech-skills wechat --platform claude
-```
+| Platform | Install path |
+| --- | --- |
+| `codex` (default) | `~/.codex/skills` |
+| `openclaw` | `~/.openclaw/skills` |
+| `claude` | `~/.claude/agents` |
 
 ### Option 2: global install
 
 ```bash
 npm install -g github:jingw2/zerofuturetech-skills
 zerofuturetech-skills wechat
-zerofuturetech-skills x-essay
-zerofuturetech-skills wechat --platform openclaw
-zerofuturetech-skills wechat --platform claude
-```
-
-The old explicit form still works:
-
-```bash
-zerofuturetech-skills install zerofuturetech-wechat-publisher
-zerofuturetech-skills install high-agency-x-essay-writer
-```
-
-Custom target directory:
-
-```bash
-npx github:jingw2/zerofuturetech-skills wechat --target ~/.codex/skills
-npx github:jingw2/zerofuturetech-skills wechat --platform claude --target ~/.claude/agents
+zerofuturetech-skills x-essay --platform claude
 ```
 
 ### Option 3: copy manually
 
 ```bash
-cp -R skills/high-agency-x-essay-writer ~/.codex/skills/
 cp -R skills/zerofuturetech-wechat-publisher ~/.codex/skills/
-```
-
-Or with `rsync`:
-
-```bash
-rsync -a skills/high-agency-x-essay-writer/ ~/.codex/skills/high-agency-x-essay-writer/
-rsync -a skills/zerofuturetech-wechat-publisher/ ~/.codex/skills/zerofuturetech-wechat-publisher/
+cp -R skills/high-agency-x-essay-writer ~/.codex/skills/
 ```
 
 ## WeChat Publisher Setup
@@ -207,14 +159,14 @@ rsync -a skills/zerofuturetech-wechat-publisher/ ~/.codex/skills/zerofuturetech-
 
 Preferred config paths:
 
-- Project config: `.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
-- User config: `~/.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- Project: `.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
+- User: `~/.zerofuturetech-skills/zerofuturetech-wechat-publisher/EXTEND.md`
 - Project env: `.zerofuturetech-skills/.env`
 - User env: `~/.zerofuturetech-skills/.env`
 
 Recommended `EXTEND.md`:
 
-```md
+```
 default_theme: default
 default_color: green
 default_author: Zero Future Tech
@@ -230,25 +182,16 @@ WECHAT_APP_ID=your_wechat_app_id
 WECHAT_APP_SECRET=your_wechat_app_secret
 ```
 
-Legacy `.baoyu-skills` config is still accepted as a migration fallback.
-
 ### Usage
 
-Prepare article files:
-
 ```bash
+# Prepare
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style auto --compare-styles
-```
 
-Preview the final draft payload first:
-
-```bash
+# Preview
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --dry-run
-```
 
-Publish to WeChat draft box:
-
-```bash
+# Publish
 python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/publish_wechat.py .wechat-prep/<slug>/metadata.json --method api
 ```
 
@@ -261,52 +204,30 @@ author: Author name
 summary: One-line summary
 cover: imgs/cover.png
 article_type: essay
-content_source_url: https://example.com/original-post
+wechat_style: tech-editorial
 need_open_comment: 1
 only_fans_can_comment: 0
-wechat_theme: default
-wechat_color: green
-wechat_style: tech-editorial
 ---
-```
-
-Style selection:
-
-```bash
-python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style tech-editorial
-python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style minimal-cn
-python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.py article.md --style bold
-```
-
-Or in frontmatter:
-
-```yaml
-wechat_style: tech-editorial
 ```
 
 ## Troubleshooting
 
-Each skill includes a **Gotchas** section in its `SKILL.md` file with solutions to common issues:
+Each skill's `SKILL.md` includes a **Gotchas** section with solutions to common issues:
 
-- **WeChat Publisher**: Image handling, API credential configuration, Markdown encoding
-- **X Essay Writer**: Weak source material, vague claims, translation pitfalls
-- **Thumbnail Illustrator**: Image provider credentials, quality consistency, prompt specificity
-- **HTML Article Studio**: Article structure, image slots, HTML compatibility
-
-For detailed troubleshooting, check the Gotchas sections in:
-
-- `skills/zerofuturetech-wechat-publisher/SKILL.md`
-- `skills/high-agency-x-essay-writer/SKILL.md`
-- `skills/article-thumbnail-illustrator/SKILL.md`
-- `skills/illustrated-article-html-studio/SKILL.md`
+| Skill | Common issues |
+| --- | --- |
+| `zerofuturetech-wechat-publisher` | API credentials, image paths, Markdown encoding |
+| `high-agency-x-essay-writer` | Weak source material, vague claims, translation pitfalls |
+| `article-thumbnail-illustrator` | Provider credentials, image quality, prompt specificity |
+| `illustrated-article-html-studio` | Article structure, image slots, HTML compatibility |
 
 ## Notes
 
 - Each skill is self-contained under `skills/`
-- `SKILL.md` is the source of truth
-- `references/` stores on-demand guidance
-- Codex and OpenClaw install the original skill folders
-- Claude Code installs matching subagent markdown files from `platforms/claude/agents/`
+- `SKILL.md` is the source of truth for each skill
+- `references/` stores on-demand guidance docs
+- Codex and OpenClaw install the full skill folder
+- Claude Code installs a matching agent file from `platforms/claude/agents/`
 
 ## Star Growth
 
