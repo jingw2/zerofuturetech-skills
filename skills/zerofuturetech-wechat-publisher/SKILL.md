@@ -219,3 +219,36 @@ Preferred config paths:
 Legacy `.baoyu-skills` config is still read as a fallback for migration, but it is no longer required.
 
 If the user asks to optimize for WeChat before publishing, do the prep and preview steps first instead of jumping straight to upload.
+
+## Gotchas
+
+### API Configuration and Credentials
+
+- **Missing or invalid `WECHAT_APP_ID` and `WECHAT_APP_SECRET`**: The script will fail silently or with a cryptic error. Always check `.zerofuturetech-skills/.env` or `~/.zerofuturetech-skills/.env` first. If not set, `publish_wechat.py` cannot fetch access tokens.
+- **Token expiration**: WeChat access tokens expire every 2 hours. If the publish step waits too long between `prepare_article.py` and `publish_wechat.py`, the token may be stale. Keep these steps sequential.
+- **API quota exceeded**: WeChat has daily rate limits on draft creation and image uploads. If publishing multiple articles rapidly, you may hit the limit. Check the official API error codes in the response.
+
+### Image Handling
+
+- **Image paths must be absolute or relative to current working directory**: If you prepare an article with relative image paths (e.g., `imgs/cover.png`), but then publish from a different directory, the paths will not resolve. Use absolute paths or ensure consistent working directory between prepare and publish steps.
+- **Remote URLs in images**: WeChat does not accept image URLs pointing to external sources during draft creation. The `publish_wechat.py` script will attempt to download and re-upload images to WeChat's servers. If the original URL becomes inaccessible, image upload will fail.
+- **Large image files**: WeChat has size limits on images. If an image exceeds 5MB, the upload will fail. Compress images before publishing or let the script handle it (check if compression is implemented).
+
+### Markdown and Content Issues
+
+- **UTF-8 encoding**: If the Markdown file is not UTF-8 encoded (e.g., GBK or UTF-16), the parser may fail or produce garbled output, especially with Chinese characters. Always save articles as UTF-8.
+- **Duplicate H1 titles**: If the frontmatter contains a `title` and the Markdown body also starts with `# Title`, the `prepare_article.py` script should remove the duplicate, but if it doesn't, the WeChat draft will look odd with title duplication.
+- **Inline HTML in Markdown**: WeChat supports a limited set of HTML tags. If your Markdown contains custom HTML (e.g., `<div>` or unsupported event handlers), it will be stripped or cause rendering issues. Stick to basic tags: `<strong>`, `<em>`, `<a>`, `<br>`, `<p>`, `<blockquote>`, `<ul>`, `<ol>`, `<li>`, `<code>`.
+- **Link URLs in WeChat**: External links work, but WeChat may flag suspicious domains. Internal links (pointing to other WeChat articles or official accounts) must follow WeChat's internal URL format.
+
+### Style and Layout
+
+- **Style preset not recognized**: If you pass `--style invalid-style`, the script will default to `auto` without warning. Always use one of: `auto`, `minimal-cn`, `tech-editorial`, `bold`.
+- **Article type mismatch**: Choosing `--article-type tutorial` but providing essay-style content (no steps, no numbered sections) may result in odd H2/H3 hierarchy. Match the article type to the actual content structure.
+- **Mobile preview issues**: The `prepare_article.py` script generates HTML preview, but WeChat draft rendering may differ slightly. Always preview the draft inside WeChat's official account backend before final publishing.
+
+### Workflow and Output
+
+- **Output directory not created**: If the `--output-dir` flag points to a non-existent parent directory, the script will fail. Ensure parent directories exist or use relative paths inside the current working directory.
+- **Metadata.json corruption**: If `metadata.json` is manually edited and malformed JSON is introduced, `publish_wechat.py` will fail to parse it. Always regenerate it via `prepare_article.py` rather than manual edits.
+- **Publishing without preparation**: If you try to run `publish_wechat.py` on a metadata file that was prepared with an older version of the script, field names or structure may have changed. Re-run `prepare_article.py` to ensure compatibility.

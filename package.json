@@ -2,9 +2,39 @@
   "name": "zerofuturetech-skills",
   "version": "0.1.0",
   "private": false,
-  "description": "Reusable Codex skills from Zero Future Tech",
+  "description": "Enterprise-grade reusable skills for Claude Code, Codex, and OpenClaw - WeChat publishing, essay writing, image generation, and HTML article authoring",
+  "homepage": "https://github.com/jingw2/zerofuturetech-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jingw2/zerofuturetech-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jingw2/zerofuturetech-skills/issues"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "openclaw",
+    "skills",
+    "content-generation",
+    "wechat",
+    "essay-writer",
+    "article-generation",
+    "image-generation",
+    "html-publishing"
+  ],
+  "author": "jingw2",
   "license": "MIT",
   "bin": {
     "zerofuturetech-skills": "./scripts/install-skill.mjs"
-  }
+  },
+  "files": [
+    "skills/",
+    "platforms/",
+    "scripts/",
+    "assets/",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ]
 }

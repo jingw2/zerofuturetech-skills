@@ -176,3 +176,39 @@ Use the lightest useful mode:
 - full bundle: article Markdown, assets, and polished HTML
 
 If the user asks for the integrated HTML result, prefer the full bundle.
+
+## Gotchas
+
+### Article Writing and Content
+
+- **Writing from a weak premise**: If the input is just a theme or loose notes without a clear thesis, the article will lack focus. Always identify the central argument first: "What is the ONE claim the reader should believe?" If you can't articulate it in one sentence, don't start writing yet.
+- **Switching voices mid-article**: The skill should maintain the high-agency essay style throughout. If sections drift into explanatory, gentle, or overly cheerful tones, the piece will feel inconsistent. Review for tonal consistency before finalizing.
+- **Over-length**: If the article exceeds 2000-2500 words, consider splitting it. Longer pieces need stronger structural guidance, and mobile reading experience degrades. The HTML output quality assumes a tighter article.
+
+### Image Generation and Slots
+
+- **Image directives in wrong format**: The script expects image slots as `[[image: cover | description]]` or `[[image: section | description]]`. If you use different syntax (e.g., `[image]` or `![[image]]`), the parser won't recognize them. Use the exact format.
+- **Too many images**: If you insert image slots for every section, the article becomes an image gallery, not a readable piece. Limit to one cover + one to two section images. Images should support rhythm, not dominate.
+- **Image descriptions are too vague**: If the image slot description is "picture of AI" or "tech stuff", the generated image will be generic. Write specific, compositional prompts: "minimalist diagram of agent handoff architecture, blue-gray palette, no text, icon-style".
+- **Missing image provider credentials**: If you specify `--image-provider openai` but `OPENAI_API_KEY` is not set, the script will fail or skip image generation silently. Always verify credentials are available before running.
+
+### HTML Output and Layout
+
+- **HTML style mismatch with content**: If you choose `--html-style bold` (strong colors, high contrast) but the article is a subtle, introspective essay, the layout will feel at odds with the writing. Match the HTML style to the article's tone.
+- **Mobile rendering issues**: The generated HTML is responsive, but complex CSS or images may render poorly on small screens. Test the HTML file on a mobile device before considering it final.
+- **CSS framework compatibility**: The HTML includes inline and `<style>` block CSS. If you import this HTML into another page or CMS, conflicting styles may cause layout breakage. The standalone HTML works best when published as-is or imported into a CSS-isolated container.
+- **Image paths in final HTML**: If images are generated and saved under `assets/`, the HTML references them with relative paths (e.g., `assets/cover.png`). If you move the HTML file without moving the assets folder, images will 404. Keep the directory structure intact or rewrite paths to absolute URLs.
+
+### Workflow and Integration
+
+- **Markdown not pre-structured**: If you pass raw notes or a transcript (no H2/H3 structure), the script will try to infer the structure. This may result in odd section breaks or missing section images. Provide a well-organized Markdown with clear section headings.
+- **Conflicting frontmatter and CLI flags**: If the Markdown includes `html_style: minimal` but you pass `--html-style bold`, the CLI flag will override. This can be confusing. Use either frontmatter OR CLI flags, not both, for consistency.
+- **Output directory collisions**: If you run the script twice on the same input, old files in the output directory will be overwritten. Backup important outputs before re-running.
+- **Article already has images embedded**: If the input Markdown includes image references (`![caption](path/to/image.png)`), these are *different* from the `[[image: ...]]` slots. Embedded images stay as-is; `[[image: ...]]` slots are replaced with generated images. Don't mix both systems unless you understand the interaction.
+
+### Provider and Configuration Issues
+
+- **Switching image providers mid-workflow**: If you generate images with OpenAI and later want to regenerate with Gemini, the prompts and image sizes may not be compatible. The visual family may feel inconsistent. Decide on a provider upfront.
+- **Image model deprecation**: OpenAI and Gemini periodically deprecate or rename models. If your config specifies an old model name, the script will fail. Check the provider's latest available models.
+- **API quota and rate limits**: Generating a full article with cover + section images can incur costs and may hit rate limits, especially with OpenAI. Use `--dry-run` first to preview before committing to generation.
+- **Language mismatch**: If frontmatter specifies `language: zh` (Chinese) but the article content is in English, some image prompts or HTML generation may produce unexpected results. Match language to content.

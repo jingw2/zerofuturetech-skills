@@ -36,13 +36,19 @@ Install the thumbnail + article image skill:
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 ```
 
-Both commands install to `~/.codex/skills` by default.
-
-Other platforms:
+All commands install to `~/.codex/skills` by default. For other platforms:
 
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
 npx github:jingw2/zerofuturetech-skills wechat --platform claude
+```
+
+**New in v0.1.0**: List all skills and view documentation:
+
+```bash
+npx github:jingw2/zerofuturetech-skills --list
+npx github:jingw2/zerofuturetech-skills --help
+npx github:jingw2/zerofuturetech-skills wechat --dry-run
 ```
 
 ## Skills
@@ -277,6 +283,22 @@ Or in frontmatter:
 ```yaml
 wechat_style: tech-editorial
 ```
+
+## Troubleshooting
+
+Each skill includes a **Gotchas** section in its `SKILL.md` file with solutions to common issues:
+
+- **WeChat Publisher**: Image handling, API credential configuration, Markdown encoding
+- **X Essay Writer**: Weak source material, vague claims, translation pitfalls
+- **Thumbnail Illustrator**: Image provider credentials, quality consistency, prompt specificity
+- **HTML Article Studio**: Article structure, image slots, HTML compatibility
+
+For detailed troubleshooting, check the Gotchas sections in:
+
+- `skills/zerofuturetech-wechat-publisher/SKILL.md`
+- `skills/high-agency-x-essay-writer/SKILL.md`
+- `skills/article-thumbnail-illustrator/SKILL.md`
+- `skills/illustrated-article-html-studio/SKILL.md`
 
 ## Notes
 

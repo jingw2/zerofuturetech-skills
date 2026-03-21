@@ -36,13 +36,19 @@ npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 ```
 
-默认会安装到 `~/.codex/skills`。
-
-其他平台安装示例：
+默认会安装到 `~/.codex/skills`。其他平台安装示例：
 
 ```bash
 npx github:jingw2/zerofuturetech-skills wechat --platform openclaw
 npx github:jingw2/zerofuturetech-skills wechat --platform claude
+```
+
+**v0.1.0 新增功能**：列出所有 skills 和查看帮助文档：
+
+```bash
+npx github:jingw2/zerofuturetech-skills --list
+npx github:jingw2/zerofuturetech-skills --help
+npx github:jingw2/zerofuturetech-skills wechat --dry-run
 ```
 
 ## Skills
@@ -277,6 +283,22 @@ python3 ~/.codex/skills/zerofuturetech-wechat-publisher/scripts/prepare_article.
 ```yaml
 wechat_style: tech-editorial
 ```
+
+## 故障排查
+
+每个 skill 的 `SKILL.md` 都有一个 **"Gotchas"** 部分，记录常见问题和解决方案：
+
+- **微信发布**：图片处理、API 凭证、Markdown 编码
+- **X 长文写作**：弱观点、不清晰的主张、翻译陷阱
+- **Thumbnail 生成**：Image provider 凭证、图片一致性、Prompt 质量
+- **HTML 文章工作室**：文章结构、图片槽位、HTML 兼容性
+
+详细故障排查请查看：
+
+- `skills/zerofuturetech-wechat-publisher/SKILL.md`
+- `skills/high-agency-x-essay-writer/SKILL.md`
+- `skills/article-thumbnail-illustrator/SKILL.md`
+- `skills/illustrated-article-html-studio/SKILL.md`
 
 ## 说明
 

@@ -127,3 +127,36 @@ Use the lightest useful mode:
 - Skeleton: hook + section outline + closing takeaway
 
 If the user explicitly asks for "Dan Koe style", explain that you will capture high-level structural traits without imitating his exact voice.
+
+## Gotchas
+
+### Common Failure Modes in Essay Quality
+
+- **Vague central claim**: If the input doesn't have a clear thesis or tension point, the essay will feel meandering. Always clarify: "What's the ONE thing the reader should believe differently after reading this?" before writing.
+- **Repeating the thesis instead of advancing it**: Each section should add new reasoning, not restate the opening claim in different words. Watch for patterns like "This is important because... (section 2) This is important because... (section 3)".
+- **Losing the reader's self-interest**: High-agency writing only works if the reader can see themselves in the piece. If your examples and evidence don't connect to the reader's actual situation, the piece will feel preachy or theoretical.
+
+### Language and Style Pitfalls
+
+- **Translating English rhythm into Chinese directly**: English persuasion often uses longer setups and slower reveals. Chinese readers expect faster judgment and sharper pivots. If you translate an English essay word-for-word into Chinese, it will feel sluggish.
+- **Over-using imported terminology**: "Leverage", "optimization", "friction" are fine, but stuffing the essay with jargon makes it feel like a business book, not a personal essay. When a direct Chinese expression exists, use it.
+- **Fake-deep final lines**: Ending with a generic wisdom (e.g., "Remember, the only limit is yourself") will undermine everything before it. The closing should feel earned and specific to the argument, not a motivational poster.
+- **Inconsistent tone across sections**: If your essay starts confrontational and shifts to gentle and encouraging midway, the reader will feel whiplash. Decide early: is this a tough-love piece or a supportive reframe? Maintain that consistently.
+
+### Bilingual Output Mistakes
+
+- **Thinking bilingual means copy-paste translation**: Don't use a translator and call it bilingual. Each language version should feel native and allow for different title choices, different examples, and different transitions while keeping the core thesis aligned.
+- **Losing cultural context in adaptation**: A metaphor or reference that resonates in English (e.g., "startup founder mentality") may not resonate the same way in Chinese. Swap in culturally grounded examples instead of forcing literal parallels.
+- **Over-explaining in one language but under-explaining in the other**: Assume both versions will be read by different audiences. Don't assume the Chinese reader knows the English version's context.
+
+### Structural Issues
+
+- **Hook doesn't create actual tension**: "Did you ever wonder why..." or "Have you thought about..." are weak hooks. They ask a question but don't create urgency or friction. A stronger hook either states a provocative fact ("Most people think X is the path to success. It's the opposite.") or poses a genuine problem ("You've been told to do X, but it's actually making you worse.").
+- **Sections don't build on each other**: If section 2 could be removed without breaking the logic, it's filler. Each section should deepen or complicate the central claim.
+- **Ending doesn't land on a protocol**: If your essay ends with philosophy or another restatement, the reader is left with inspiration but no action. Strong closings provide a rule, a protocol, a question to ask yourself, or a decision to make.
+
+### Input Preparation Issues
+
+- **Weak source material**: If the input is a half-formed idea or generic observation, the essay will amplify that weakness. Push back: "This is too abstract. Can you give me a specific situation or example that triggered this idea?"
+- **No clear reader**: If you don't know who this piece is for (creators? entrepreneurs? students?), the voice will scatter. Different reader types need different hooks and evidence.
+- **Too many competing ideas**: If the input tries to address 5 different problems at once, pick ONE or split it into multiple pieces. High-agency essays work by drilling deep into one specific tension, not surveying a broad landscape.
