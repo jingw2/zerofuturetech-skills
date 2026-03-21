@@ -9,6 +9,10 @@ const skillAliases = {
   wechat: "zerofuturetech-wechat-publisher",
   "x-essay": "high-agency-x-essay-writer",
   essay: "high-agency-x-essay-writer",
+  creator: "zft-skill-creator",
+  "skill-creator": "zft-skill-creator",
+  reviewer: "zft-skill-reviewer",
+  "skill-reviewer": "zft-skill-reviewer",
 };
 const platformTargets = {
   codex: path.join(os.homedir(), ".codex", "skills"),
@@ -62,7 +66,7 @@ Usage:
   zerofuturetech-skills --help
 
 Aliases:
-  wechat, x-essay, essay
+  wechat, x-essay, essay, creator, reviewer
 
 Platforms:
   codex      Install to ~/.codex/skills (default)

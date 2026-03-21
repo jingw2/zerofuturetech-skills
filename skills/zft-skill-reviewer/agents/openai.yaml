@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZFT Skill Reviewer"
+  short_description: "Audit and score skill quality against best practices"
+  default_prompt: "Use $zft-skill-reviewer to review this skill folder and produce a structured quality report with scores and prioritized improvement recommendations."

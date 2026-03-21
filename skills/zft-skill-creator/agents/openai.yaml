@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZFT Skill Creator"
+  short_description: "Scaffold a new skill from a description"
+  default_prompt: "Use $zft-skill-creator to create a complete new skill folder structure from my description of what the skill should do."

@@ -11,6 +11,8 @@ npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
 npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
+npx github:jingw2/zerofuturetech-skills creator
+npx github:jingw2/zerofuturetech-skills reviewer
 ```
 
 默认安装到 `~/.codex/skills`。用 `--platform` 指定其他平台：
@@ -112,6 +114,40 @@ npx github:jingw2/zerofuturetech-skills wechat --platform claude
 - 分节插图
 - 更有"活人感"的文章视觉系统
 
+### `zft-skill-creator`
+
+从自然语言描述自动搭建完整 skill 文件结构——创造其他 skill 的元技能。
+
+它可以做的事：
+
+- 把意图分类到 9 大 skill 类型之一
+- 生成包含所有必要章节的完整 `SKILL.md`（Overview、Workflow、Gotchas 等）
+- 产出 reference 文件、`agents/openai.yaml`、可选 Python 脚本存根和 Claude agent 文件
+- 校验结构完整性，并打印别名注册指引
+
+适合：
+
+- 从零开始搭建一个结构正确的新 skill
+- 了解好 skill 需要哪些章节
+- 生成脚手架后直接填写内容，而不是从头写模板
+
+### `zft-skill-reviewer`
+
+审查现有 skill 的质量并评分——提升 skill 质量的元技能。
+
+它可以做的事：
+
+- 执行结构检查（文件存在性、frontmatter、章节顺序、reference 链接）
+- 评估 description 质量、Gotchas 深度和渐进式披露
+- 按 8 项标准评分（1–5 分），标记反模式
+- 输出包含 Top 3 可执行改进建议的结构化 Markdown 报告
+
+适合：
+
+- 分享或发布 skill 前先做质量审查
+- 发现 Gotchas 章节的不足或缺失的 reference 文件
+- 批量审计 repo 内所有 skill，输出对比汇总表
+
 ## 安装方式
 
 ### 方式 1：npx（推荐）
@@ -121,6 +157,8 @@ npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
 npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
+npx github:jingw2/zerofuturetech-skills creator
+npx github:jingw2/zerofuturetech-skills reviewer
 ```
 
 支持的别名：
@@ -129,6 +167,8 @@ npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
 | --- | --- |
 | `wechat` | `zerofuturetech-wechat-publisher` |
 | `x-essay`、`essay` | `high-agency-x-essay-writer` |
+| `creator`、`skill-creator` | `zft-skill-creator` |
+| `reviewer`、`skill-reviewer` | `zft-skill-reviewer` |
 
 支持的平台：
 
@@ -220,6 +260,8 @@ only_fans_can_comment: 0
 | `high-agency-x-essay-writer` | 观点不清晰、主张太泛、翻译腔陷阱 |
 | `article-thumbnail-illustrator` | Provider 凭证、图片质量、Prompt 不够具体 |
 | `illustrated-article-html-studio` | 文章结构、图片槽位格式、HTML 兼容性 |
+| `zft-skill-creator` | 命名冲突、description 写成摘要、SKILL.md 过度膨胀 |
+| `zft-skill-reviewer` | 无 SKILL.md 时优雅处理、Gotchas 质量评估有主观性 |
 
 ## 说明
 

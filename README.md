@@ -11,6 +11,8 @@ npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
 npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
+npx github:jingw2/zerofuturetech-skills creator
+npx github:jingw2/zerofuturetech-skills reviewer
 ```
 
 Installs to `~/.codex/skills` by default. Use `--platform` to target other platforms:
@@ -112,6 +114,40 @@ Best for:
 - Section illustrations
 - Image systems that need more human editorial direction
 
+### `zft-skill-creator`
+
+Scaffold a complete new skill folder structure from a natural language description — the meta-skill for building other skills.
+
+What it does:
+
+- Classifies your intent into one of 9 canonical skill types
+- Generates a complete `SKILL.md` with all required sections (Overview, Workflow, Gotchas, etc.)
+- Produces reference files, `agents/openai.yaml`, optional Python script stubs, and a Claude agent file
+- Validates structure completeness and prints alias-registration guidance
+
+Best for:
+
+- Starting a new skill from scratch with proper structure
+- Learning what sections a good skill needs
+- Generating scaffolding you can fill in rather than writing boilerplate
+
+### `zft-skill-reviewer`
+
+Audit and score an existing skill against best practices — the meta-skill for improving skill quality.
+
+What it does:
+
+- Runs structural checks (file existence, frontmatter, section order, reference links)
+- Evaluates description quality, Gotchas depth, and progressive disclosure
+- Scores across 8 criteria (1–5 scale) and flags anti-patterns
+- Outputs a structured Markdown report with Top 3 actionable improvements
+
+Best for:
+
+- Reviewing a skill before sharing or publishing
+- Finding gaps in Gotchas sections or missing reference files
+- Batch-auditing all skills in a repo with a summary table
+
 ## Install Options
 
 ### Option 1: npx (recommended)
@@ -121,6 +157,8 @@ npx github:jingw2/zerofuturetech-skills wechat
 npx github:jingw2/zerofuturetech-skills x-essay
 npx github:jingw2/zerofuturetech-skills illustrated-article-html-studio
 npx github:jingw2/zerofuturetech-skills article-thumbnail-illustrator
+npx github:jingw2/zerofuturetech-skills creator
+npx github:jingw2/zerofuturetech-skills reviewer
 ```
 
 Supported aliases:
@@ -129,6 +167,8 @@ Supported aliases:
 | --- | --- |
 | `wechat` | `zerofuturetech-wechat-publisher` |
 | `x-essay`, `essay` | `high-agency-x-essay-writer` |
+| `creator`, `skill-creator` | `zft-skill-creator` |
+| `reviewer`, `skill-reviewer` | `zft-skill-reviewer` |
 
 Supported platforms:
 
@@ -220,6 +260,8 @@ Each skill's `SKILL.md` includes a **Gotchas** section with solutions to common 
 | `high-agency-x-essay-writer` | Weak source material, vague claims, translation pitfalls |
 | `article-thumbnail-illustrator` | Provider credentials, image quality, prompt specificity |
 | `illustrated-article-html-studio` | Article structure, image slots, HTML compatibility |
+| `zft-skill-creator` | Name collisions, description written as summary, over-engineered SKILL.md |
+| `zft-skill-reviewer` | Missing SKILL.md handled gracefully, Gotchas quality is subjective |
 
 ## Notes
 
